@@ -1,0 +1,64 @@
+{% set name = "torch-geometric" %}
+{% set version = "1.3.1" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+#  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+#  url: "https://github.com/rusty1s/pytorch_geometric/archive/1.3.1.tar.gz" 
+  url: "https://files.pythonhosted.org/packages/e8/e2/4765baa17abf54c71ef5c8a9ad889c24c794b24b2a535ee84816780f2d39/torch_geometric-{{ version }}.tar.gz"
+  sha256: "910ed5013955e24bb8e2c336f0e3feae3e122ea3c9913102e5ed14b1efbdf89b"
+
+build:
+  number: 0
+  preserve_egg_dir: True
+#  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
+
+requirements:
+  build:
+    - git
+    - python
+    - pip
+  host:
+    - pytest-runner
+    - python
+    - pytorch>=1.1.0
+    - scipy 
+  run:
+    - h5py
+    - networkx
+    - numpy
+    - pandas
+#    - plyfile
+    - python
+#    - rdflib
+    - scikit-learn
+    - scipy
+#    - torch-scatter
+#    - torch-sparse
+#    - torch-cluster
+    - requests 
+
+#test:
+#  requires:
+#    - mock
+#    - pytest
+#    - pytest-cov
+#    - pytorch >=1.1.0
+
+
+
+about:
+  home: "https://github.com/rusty1s/pytorch_geometric"
+  license: "UNKNOWN"
+  license_family: "OTHER"
+  license_file: ""
+  summary: "Geometric Deep Learning Extension Library for PyTorch"
+  doc_url: ""
+  dev_url: ""
+
+extra:
+  recipe-maintainers:
+    - your-github-id-here
