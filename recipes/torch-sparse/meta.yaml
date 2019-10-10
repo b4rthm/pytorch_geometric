@@ -1,0 +1,49 @@
+{% set name = "torch-sparse" %}
+{% set version = "0.4.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://files.pythonhosted.org/packages/b0/0a/2ff678e0d04e524dd2cf990a6202ced8c0ffe3fe6b08e02f25cc9fd27da0/torch_sparse-0.4.0.tar.gz"
+  sha256: "bf217539b4f714a1d6fac4d39ace3ad8033871717f44f8f365a2746056b9d805"
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
+
+requirements:
+  host:
+    - pip
+    - python
+    - scipy
+    - pytorch ==1.1.0
+    - pytest-runner
+  run:
+    - python
+    - scipy
+    - torch-scatter
+
+test:
+  imports:
+    - torch_sparse
+    - torch_sparse.utils
+  requires:
+    - torch-scatter
+    - pytest
+    - pytest-cov
+    - pytorch ==1.1.0
+
+about:
+  home: "https://github.com/rusty1s/pytorch_sparse"
+  license: "UNKNOWN"
+  license_family: "OTHER"
+  license_file: ""
+  summary: "PyTorch Extension Library of Optimized Autograd Sparse Matrix Operations"
+  doc_url: ""
+  dev_url: ""
+
+extra:
+  recipe-maintainers:
+    - your-github-id-here

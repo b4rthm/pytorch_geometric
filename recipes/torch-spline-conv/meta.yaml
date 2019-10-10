@@ -1,0 +1,45 @@
+{% set name = "torch-spline-conv" %}
+{% set version = "1.1.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://files.pythonhosted.org/packages/3c/dd/daa9d0b7b2ede913e573876ae286a58ec296678858f2814ff6d6789b234f/torch_spline_conv-1.1.0.tar.gz"
+  sha256: "e6029526205d1f7cb535389bebd81decf0649a20ea6a67688c02bd335a7f9339"
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
+
+requirements:
+  host:
+    - pip
+    - python
+    - pytest-runner
+    - pytorch ==1.1.0
+  run:
+    - python
+
+test:
+  imports:
+    - torch_spline_conv
+    - torch_spline_conv.utils
+  requires:
+    - pytest
+    - pytest-cov
+    - pytorch ==1.1.0
+
+about:
+  home: "https://github.com/rusty1s/pytorch_spline_conv"
+  license: "UNKNOWN"
+  license_family: "OTHER"
+  license_file: ""
+  summary: "Implementation of the Spline-Based Convolution Operator of SplineCNN in PyTorch"
+  doc_url: ""
+  dev_url: ""
+
+extra:
+  recipe-maintainers:
+    - your-github-id-here
