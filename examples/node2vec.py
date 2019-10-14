@@ -70,21 +70,3 @@ colors = [
     '#ffc0cb', '#bada55', '#008080', '#420420', '#7fe5f0', '#065535', '#ffd700'
 ]
 plot_points(colors)
-
-def plot_points():
-    x = model(torch.arange(data.num_nodes, device=device))
-    x = x.cpu().detach().numpy()
-    y = data.y.cpu().detach().numpy()
-
-    colors = ['#ffc0cb','#bada55','#008080','#420420','#7fe5f0','#065535','#ffd700']
-
-    tsne = TSNE(n_components=2)
-    x_dim_reduc = tsne.fit_transform(x)
-
-    plt.figure(figsize=(8,8))
-    for color, i in zip(colors, [0, 1, 2, 3, 4, 5, 6]):
-        plt.scatter(x_dim_reduc[y == i, 0], x_dim_reduc[y == i, 1], s=20, color=color)
-    plt.axis('off')
-    plt.savefig('node2vec_visualization.png', bbox_inches='tight')
-
-plot_points()
