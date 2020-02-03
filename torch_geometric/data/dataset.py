@@ -78,8 +78,6 @@ class Dataset(torch.utils.data.Dataset):
         super(Dataset, self).__init__()
 
         self.root = osp.expanduser(osp.normpath(root))
-        self.raw_dir = osp.join(self.root, 'raw')
-        self.processed_dir = osp.join(self.root, 'processed')
         self.transform = transform
         self.pre_transform = pre_transform
         self.pre_filter = pre_filter
@@ -102,6 +100,14 @@ class Dataset(torch.utils.data.Dataset):
 
         self._download()
         self._process()
+
+    @property
+    def raw_dir(self):
+        return osp.join(self.root, 'raw')
+
+    @property
+    def processed_dir(self):
+        return osp.join(self.root, 'processed')
 
     @property
     def num_node_features(self):

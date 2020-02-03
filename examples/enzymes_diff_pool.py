@@ -8,7 +8,7 @@ import torch_geometric.transforms as T
 from torch_geometric.data import DenseDataLoader
 from torch_geometric.nn import DenseSAGEConv, dense_diff_pool
 
-max_nodes = 100
+max_nodes = 126
 
 
 class MyFilter(object):
@@ -17,11 +17,8 @@ class MyFilter(object):
 
 
 path = osp.join(osp.dirname(osp.realpath(__file__)), '..', 'data', 'ENZYMES_d')
-dataset = TUDataset(
-    path,
-    name='ENZYMES',
-    transform=T.ToDense(max_nodes),
-    pre_filter=MyFilter())
+dataset = TUDataset(path, name='ENZYMES', transform=T.ToDense(max_nodes),
+                    pre_filter=MyFilter())
 dataset = dataset.shuffle()
 n = (len(dataset) + 9) // 10
 test_dataset = dataset[:n]
@@ -33,13 +30,8 @@ train_loader = DenseDataLoader(train_dataset, batch_size=20)
 
 
 class GNN(torch.nn.Module):
-    def __init__(self,
-                 in_channels,
-                 hidden_channels,
-                 out_channels,
-                 normalize=False,
-                 add_loop=False,
-                 lin=True):
+    def __init__(self, in_channels, hidden_channels, out_channels,
+                 normalize=False, add_loop=False, lin=True):
         super(GNN, self).__init__()
 
         self.add_loop = add_loop
@@ -89,7 +81,7 @@ class Net(torch.nn.Module):
         self.gnn1_pool = GNN(3, 64, num_nodes, add_loop=True)
         self.gnn1_embed = GNN(3, 64, 64, add_loop=True, lin=False)
 
-        num_nodes = ceil(0.25 * max_nodes)
+        num_nodes = ceil(0.25 * num_nodes)
         self.gnn2_pool = GNN(3 * 64, 64, num_nodes)
         self.gnn2_embed = GNN(3 * 64, 64, 64, lin=False)
 

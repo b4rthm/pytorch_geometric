@@ -18,6 +18,7 @@ from .point_conv import PointConv
 from .gmm_conv import GMMConv
 from .spline_conv import SplineConv
 from .nn_conv import NNConv, ECConv
+from .cg_conv import CGConv
 from .edge_conv import EdgeConv, DynamicEdgeConv
 from .x_conv import XConv
 from .ppf_conv import PPFConv
@@ -46,6 +47,7 @@ __all__ = [
     'SplineConv',
     'NNConv',
     'ECConv',
+    'CGConv',
     'EdgeConv',
     'DynamicEdgeConv',
     'XConv',
